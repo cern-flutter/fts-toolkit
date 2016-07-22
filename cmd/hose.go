@@ -29,15 +29,15 @@ import (
 	"time"
 )
 
-var sleep = time.Second
-var nMsgs = 1
-var sourceSes = []string{}
-var destSes = []string{}
-var states = []string{}
-var delegationId = "123456789"
-var vo = "dteam"
-var activity = "default"
-var persistent = false
+var sleep time.Duration
+var nMsgs int
+var sourceSes []string
+var destSes []string
+var states []string
+var delegationId string
+var vo string
+var activity string
+var persistent bool
 
 var HoseCmd = &cobra.Command{
 	Use:   "hose",
