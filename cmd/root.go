@@ -24,6 +24,8 @@ import (
 	"time"
 )
 
+var debug bool
+
 var StompArgs = stomp.ConnectionParameters{
 	ConnectionLost: func(b *stomp.Broker) {
 		log.Warn("Lost connection with stomp, reconnect...")
@@ -46,9 +48,15 @@ var RootCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()
 	},
+	PersistentPreRun: func(cmd *cobra.Command, args []string) {
+		if debug {
+			log.SetLevel(log.DebugLevel)
+		}
+	},
 }
 
 func init() {
+	RootCmd.PersistentFlags().BoolVar(&debug, "debug", false, "Debug")
 	RootCmd.PersistentFlags().StringVar(&StompArgs.Address, "stomp", "localhost:61613", "Stomp host and port")
 	RootCmd.PersistentFlags().StringVar(&StompArgs.Login, "stomp-login", "fts", "Stomp loging")
 	RootCmd.PersistentFlags().StringVar(&StompArgs.Passcode, "stomp-passcode", "fts", "Stomp passcode")
