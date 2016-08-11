@@ -102,8 +102,9 @@ func GenerateRandomTransfer() *tasks.Batch {
 	}
 
 	return &tasks.Batch{
-		Type:  tasks.BatchSimple,
-		State: batchState,
+		Timestamp: time.Now(),
+		Type:      tasks.BatchSimple,
+		State:     batchState,
 		Transfers: []*tasks.Transfer{
 			{
 				State:       fileState,
@@ -136,5 +137,6 @@ func init() {
 		&states, "states", []string{string(tasks.BatchReady)}, "Possible states")
 	HoseCmd.PersistentFlags().StringVar(&delegationId, "delegation-id", "123456789", "Delegation id")
 	HoseCmd.PersistentFlags().StringVar(&vo, "vo", "dteam", "VO")
+	HoseCmd.PersistentFlags().StringVar(&activity, "activity", "default", "Activity share")
 	HoseCmd.PersistentFlags().BoolVar(&persistent, "persist", false, "Persist messages")
 }
