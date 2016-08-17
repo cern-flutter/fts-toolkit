@@ -38,12 +38,12 @@ var delegationId string
 var vo string
 var activity string
 var persistent bool
+var destination string
 
 var HoseCmd = &cobra.Command{
 	Use:   "hose",
 	Short: "Produce a set of messages",
 	Run: func(cmd *cobra.Command, args []string) {
-		destination := config.WorkerQueue
 		if len(args) > 0 {
 			destination = args[0]
 		}
@@ -66,6 +66,7 @@ var HoseCmd = &cobra.Command{
 			}
 			log.Info("Sending batch ", batch.GetID())
 			producer.Send(destination, string(data), sendParams)
+			log.Debug(string(data))
 
 			time.Sleep(sleep)
 		}
@@ -139,4 +140,5 @@ func init() {
 	HoseCmd.PersistentFlags().StringVar(&vo, "vo", "dteam", "VO")
 	HoseCmd.PersistentFlags().StringVar(&activity, "activity", "default", "Activity share")
 	HoseCmd.PersistentFlags().BoolVar(&persistent, "persist", false, "Persist messages")
+	HoseCmd.PersistentFlags().String(&destination, "destination", config.TransferTopic, "Stomp destination")
 }
