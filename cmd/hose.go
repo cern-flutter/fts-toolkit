@@ -140,5 +140,5 @@ func init() {
 	HoseCmd.PersistentFlags().StringVar(&vo, "vo", "dteam", "VO")
 	HoseCmd.PersistentFlags().StringVar(&activity, "activity", "default", "Activity share")
 	HoseCmd.PersistentFlags().BoolVar(&persistent, "persist", false, "Persist messages")
-	HoseCmd.PersistentFlags().String(&destination, "destination", config.TransferTopic, "Stomp destination")
+	HoseCmd.PersistentFlags().StringVar(&destination, "destination", config.TransferTopic, "Stomp destination")
 }
