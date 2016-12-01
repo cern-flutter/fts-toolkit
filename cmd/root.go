@@ -39,7 +39,7 @@ var StompArgs = stomp.ConnectionParameters{
 			}
 		}
 	},
-	ClientId: "fts-toolkit-" + uuid.NewV4().String(),
+	ClientID: "fts-toolkit-" + uuid.NewV4().String(),
 }
 
 var RootCmd = &cobra.Command{
